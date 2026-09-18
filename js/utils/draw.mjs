@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { isMobile } from './helpers.mjs';
 
 /**
@@ -108,13 +109,11 @@ function addImageToPaper() {
 								0,
 								0,
 								drawCanvas.width,
-								(drawCanvas.height * tempImage.width) /
-									drawCanvas.width
+								(drawCanvas.height * tempImage.width) / drawCanvas.width
 							);
 						} else {
 							const newWidth =
-								(drawCanvas.height * tempImage.width) /
-								tempImage.height;
+								(drawCanvas.height * tempImage.width) / tempImage.height;
 							ctx.drawImage(
 								tempImage,
 								drawCanvas.width / 2 - newWidth / 2,

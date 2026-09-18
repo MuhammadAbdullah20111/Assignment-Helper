@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import {
 	addFontFromFile,
 	formatText,
@@ -35,10 +36,7 @@ const EVENT_MAP = {
 				// Remove existing heading classes
 				let parent = range.commonAncestorContainer;
 				while (parent && parent !== document) {
-					if (
-						parent.classList &&
-						parent.classList.contains('heading')
-					) {
+					if (parent.classList && parent.classList.contains('heading')) {
 						parent.classList.remove('h1', 'h2', 'h3');
 						parent = parent.parentNode;
 						break;
@@ -72,10 +70,7 @@ const EVENT_MAP = {
 	'#handwriting-font': {
 		on: 'change',
 		action: (e) => {
-			document.body.style.setProperty(
-				'--handwriting-font',
-				e.target.value
-			);
+			document.body.style.setProperty('--handwriting-font', e.target.value);
 		}
 	},
 	'#font-size': {
