@@ -2,15 +2,15 @@ const pageEl = document.querySelector('.page-a');
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 function addFontFromFile(fileObj) {
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    const newFont = new FontFace('temp-font', e.target.result);
-    newFont.load().then((loadedFace) => {
-      document.fonts.add(loadedFace);
-      pageEl.style.fontFamily = 'temp-font';
-    });
-  };
-  reader.readAsArrayBuffer(fileObj);
+	const reader = new FileReader();
+	reader.onload = (e) => {
+		const newFont = new FontFace('temp-font', e.target.result);
+		newFont.load().then((loadedFace) => {
+			document.fonts.add(loadedFace);
+			pageEl.style.fontFamily = 'temp-font';
+		});
+	};
+	reader.readAsArrayBuffer(fileObj);
 }
 
 /**
@@ -20,39 +20,61 @@ function addFontFromFile(fileObj) {
  * Creates PDF from list of given images
  */
 function createPDF(imgs) {
-  // eslint-disable-next-line new-cap
-  const doc = new jsPDF('p', 'pt', 'a4');
-  const width = doc.internal.pageSize.width;
-  const height = doc.internal.pageSize.height;
-  for (const i in imgs) {
-    doc.text(10, 20, '');
-    doc.addImage(
-      imgs[i],
-      'JPEG',
-      25,
-      50,
-      width - 50,
-      height - 80,
-      'image-' + i
-    );
-    if (i != imgs.length - 1) {
-      doc.addPage();
-    }
-  }
-  doc.save();
+	// eslint-disable-next-line new-cap
+	const doc = new jsPDF('p', 'pt', 'a4');
+	const width = doc.internal.pageSize.width;
+	const height = doc.internal.pageSize.height;
+	for (const i in imgs) {
+		doc.text(10, 20, '');
+		doc.addImage(
+			imgs[i],
+			'JPEG',
+			25,
+			50,
+			width - 50,
+			height - 80,
+			'image-' + i
+		);
+		if (i != imgs.length - 1) {
+			doc.addPage();
+		}
+	}
+	doc.save();
 }
 
 function formatText(event) {
-  event.preventDefault();
-  const text = event.clipboardData
-    .getData('text/plain')
-    .replace(/\n/g, '<br/>');
-  document.execCommand('insertHTML', false, text);
+	event.preventDefault();
+	const text = event.clipboardData.getData('text/plain');
+	const selection = window.getSelection();
+	if (selection.rangeCount > 0) {
+		const range = selection.getRangeAt(0);
+		range.deleteContents();
+		// Split text by newlines and insert with <br> elements
+		const fragment = document.createDocumentFragment();
+		const lines = text.split('\n');
+		lines.forEach((line, i) => {
+			fragment.appendChild(document.createTextNode(line));
+			if (i < lines.length - 1) {
+				fragment.appendChild(document.createElement('br'));
+			}
+		});
+		range.insertNode(fragment);
+		// Move cursor to end of inserted content
+		range.collapse(false);
+		selection.removeAllRanges();
+		selection.addRange(range);
+	}
 }
 
+let previousPaperUrl = null;
+
 function addPaperFromFile(file) {
-  const tmppath = URL.createObjectURL(file);
-  pageEl.style.backgroundImage = `url(${tmppath})`;
+	// Revoke previous Object URL to prevent memory leak
+	if (previousPaperUrl) {
+		URL.revokeObjectURL(previousPaperUrl);
+	}
+	previousPaperUrl = URL.createObjectURL(file);
+	pageEl.style.backgroundImage = `url(${previousPaperUrl})`;
 }
 
 export { isMobile, addFontFromFile, createPDF, formatText, addPaperFromFile };
