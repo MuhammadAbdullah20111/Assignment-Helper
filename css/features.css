@@ -2,11 +2,12 @@
 
 .dark-mode-toggle {
 	cursor: pointer;
-	position: absolute;
-	top: 100px;
-	right: 150px;
+	position: fixed;
+	top: 20px;
+	right: 30px;
 	border: none;
 	background: transparent;
+	z-index: 999;
 }
 
 body:not(.user-is-tabbing) .dark-mode-toggle:focus {
@@ -174,36 +175,52 @@ img.contributor-avatar {
 	width: 100%;
 	min-height: 150px;
 	padding: 15px;
-	border: 1px solid var(--border-color);
-	border-radius: 4px;
-	background: var(--background-color);
+	border: 1px solid var(--field-borders);
+	border-radius: 8px;
+	background: var(--elevation-background);
 	color: var(--font-color-primary);
 	font-family: inherit;
 	font-size: 14px;
 	resize: vertical;
+	transition: all 0.2s ease;
+}
+
+#paraphraser-input:focus {
+	outline: none;
+	border-color: var(--primary-color);
+	box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
 }
 
 #paraphraser-input::placeholder {
-	color: var(--font-color-secondary);
+	color: var(--label-color);
 }
 
 #paraphraser-button {
 	align-self: flex-start;
 	padding: 10px 20px;
-	background: var(--primary-color);
-	color: white;
+	background: var(--primary-button-bg);
+	color: var(--primary-button-color);
 	border: none;
-	border-radius: 4px;
+	border-radius: 8px;
 	cursor: pointer;
-	transition: background 0.2s ease;
+	transition: all 0.2s ease;
+	font-weight: 500;
+	box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
 }
 
 #paraphraser-button:hover {
-	background: var(--primary-color-dark);
+	transform: translateY(-1px);
+	box-shadow: 0 6px 15px rgba(99, 102, 241, 0.4);
+}
+
+#paraphraser-button:active {
+	transform: translateY(0);
 }
 
 #paraphraser-button:disabled {
-	background: var(--disabled-color);
+	background: var(--field-borders);
+	box-shadow: none;
+	transform: none;
 	cursor: not-allowed;
 }
 
@@ -234,36 +251,52 @@ img.contributor-avatar {
 	width: 100%;
 	min-height: 150px;
 	padding: 15px;
-	border: 1px solid var(--border-color);
-	border-radius: 4px;
-	background: var(--background-color);
+	border: 1px solid var(--field-borders);
+	border-radius: 8px;
+	background: var(--elevation-background);
 	color: var(--font-color-primary);
 	font-family: inherit;
 	font-size: 14px;
 	resize: vertical;
+	transition: all 0.2s ease;
+}
+
+#paraphraser-input:focus {
+	outline: none;
+	border-color: var(--primary-color);
+	box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
 }
 
 #paraphraser-input::placeholder {
-	color: var(--font-color-secondary);
+	color: var(--label-color);
 }
 
 #paraphraser-button {
 	align-self: flex-start;
 	padding: 10px 20px;
-	background: var(--primary-color);
-	color: white;
+	background: var(--primary-button-bg);
+	color: var(--primary-button-color);
 	border: none;
-	border-radius: 4px;
+	border-radius: 8px;
 	cursor: pointer;
-	transition: background 0.2s ease;
+	transition: all 0.2s ease;
+	font-weight: 500;
+	box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
 }
 
 #paraphraser-button:hover {
-	background: var(--primary-color-dark);
+	transform: translateY(-1px);
+	box-shadow: 0 6px 15px rgba(99, 102, 241, 0.4);
+}
+
+#paraphraser-button:active {
+	transform: translateY(0);
 }
 
 #paraphraser-button:disabled {
-	background: var(--disabled-color);
+	background: var(--field-borders);
+	box-shadow: none;
+	transform: none;
 	cursor: not-allowed;
 }
 

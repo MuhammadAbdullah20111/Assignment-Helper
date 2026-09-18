@@ -26,7 +26,12 @@ async function convertDIVToImage() {
 	/** Send image data for modification if effect is scanner */
 	if (document.querySelector('#page-effects').value === 'scanner') {
 		const context = canvas.getContext('2d');
-		const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+		const imageData = context.getImageData(
+			0,
+			0,
+			canvas.width,
+			canvas.height
+		);
 		contrastImage(imageData, 0.55);
 		canvas.getContext('2d').putImageData(imageData, 0, 0);
 	}
@@ -102,7 +107,8 @@ export const deleteAll = () => {
 	outputImages.splice(0, outputImages.length);
 	renderOutput(outputImages);
 	document.querySelector('#output-header').textContent =
-		'Output' + (outputImages.length ? ' ( ' + outputImages.length + ' )' : '');
+		'Output' +
+		(outputImages.length ? ' ( ' + outputImages.length + ' )' : '');
 };
 
 const arrayMove = (arr, oldIndex, newIndex) => {
@@ -146,7 +152,9 @@ function setRemoveImageListeners() {
 				if (outputImages.length >= 0) {
 					document.querySelector('#output-header').textContent =
 						'Output' +
-						(outputImages.length ? ' ( ' + outputImages.length + ' )' : '');
+						(outputImages.length ?
+							' ( ' + outputImages.length + ' )' :
+							'');
 				}
 				renderOutput(outputImages);
 				// When output changes, we have to set remove listeners again

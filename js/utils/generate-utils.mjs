@@ -25,18 +25,23 @@ function applyPaperStyles() {
 	if (pageEffects === 'scanner') {
 		// Scanner effect
 		const angle = Math.floor(Math.random() * (120 - 50 + 1)) + 50;
-		overlayEl.style.background = `linear-gradient(${angle}deg, #0008, #0000)`;
+		overlayEl.style.background =
+			`linear-gradient(${angle}deg, #0008, #0000)`;
 		overlayEl.classList.add('shadows');
 	} else if (pageEffects === 'shadows') {
 		// Shadow effect
 		const angle = Math.random() * 360;
-		overlayEl.style.background = `linear-gradient(${angle}deg, #0008, #0000)`;
+		overlayEl.style.background =
+			`linear-gradient(${angle}deg, #0008, #0000)`;
 		overlayEl.classList.add('shadows');
 	} else {
 		overlayEl.classList.remove('shadows');
 	}
 
-	if (isFontErrory() && document.querySelector('#font-file').files.length < 1) {
+	if (
+		isFontErrory() &&
+		document.querySelector('#font-file').files.length < 1
+	) {
 		paperContentPadding =
 			paperContentEl.style.paddingTop.replace(/px/g, '') || 5;
 		const newPadding = Number(paperContentPadding) - 5;
@@ -51,7 +56,9 @@ function removePaperStyles() {
 	if (document.querySelector('#page-effects').value === 'scanner') {
 		overlayEl.classList.remove('shadows');
 	} else {
-		overlayEl.classList.remove(document.querySelector('#page-effects').value);
+		overlayEl.classList.remove(
+			document.querySelector('#page-effects').value
+		);
 	}
 
 	if (isFontErrory()) {
@@ -65,7 +72,9 @@ function renderOutput(outputImages) {
 	if (outputImages.length <= 0) {
 		outputEl.textContent =
 			'Click "Generate Image" Button to generate new image.';
-		document.querySelector('#download-as-pdf-button').classList.remove('show');
+		document.querySelector('#download-as-pdf-button').classList.remove(
+			'show'
+		);
 		document.querySelector('#delete-all-button').classList.remove('show');
 		return;
 	}
